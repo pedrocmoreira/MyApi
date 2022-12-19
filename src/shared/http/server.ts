@@ -2,6 +2,6 @@ class AppServer {
   private app: string;
 
   constructor(info: string) {
-    this.app = info ?? 'olá Dev'
+    this.app = info ?? 'Olá Dev';
   }
 }
