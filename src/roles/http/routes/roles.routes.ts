@@ -1,17 +1,19 @@
+import { Role } from '@roles/entities/Role';
 import { Router } from 'express';
-import { randomUUID } from 'node:crypto';
 
 const rolesRouter = Router();
 
-const roles = [];
+const roles: Role[] = [];
 
 rolesRouter.post('/', (request, response) => {
   const { name } = request.body;
-  const role = {
-    id: randomUUID(),
+
+  const role = new Role();
+
+  Object.assign(role, {
     name,
     created_at: new Date(),
-  };
+  });
 
   roles.push(role);
 
