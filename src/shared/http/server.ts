@@ -3,6 +3,9 @@ import express, { Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from '../../swagger.json';
+
 import { AppError } from '@shared/errors/AppError';
 import { routes } from './routes';
 
@@ -10,6 +13,8 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(routes);
 
