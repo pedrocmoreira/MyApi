@@ -71,4 +71,8 @@ export class RolesRepository {
     return this.repository.findOneBy({ name }); // quando utilizo o mesmo nome do parametro posso utilizar desse jeito
     //const role = this.repository.findOneBy({ name: xpto }); // quando utilizo não utilizo o mesmo nome do parâmetro
   }
+
+  async findById(id: string): Promise<Role | null> {
+    return this.repository.findOneBy({ id });
+  }
 }
