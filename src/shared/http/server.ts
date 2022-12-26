@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import { app } from './app';
-import { AppDataSource } from '../../typeorm/index';
+import { AppDataSource } from '../typeorm/index';
 
 AppDataSource.initialize().then(() => {
   app.listen(process.env.PORT, () => {

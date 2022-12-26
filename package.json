@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && npx tsc",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts"
+    "lint": "eslint .",
+    "lint:fix":"eslint . --fix",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
+    "typeorm":"ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "keywords": [],
   "author": "",
