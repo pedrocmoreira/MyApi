@@ -4,6 +4,7 @@ import { createRolesController } from '@roles/useCases/createRole';
 import { listRolesController } from '@roles/useCases/listRoles';
 import { showRolesController } from '@roles/useCases/showRole';
 import { updateRolesController } from '@roles/useCases/updateRole';
+import { deleteRolesController } from '@roles/useCases/deleteRole';
 
 const rolesRouter = Router();
 
@@ -21,6 +22,10 @@ rolesRouter.get('/:id', (request, response) => {
 
 rolesRouter.put('/:id', (request, response) => {
   return updateRolesController.handle(request, response);
+});
+
+rolesRouter.delete('/:id', (request, response) => {
+  return deleteRolesController.handle(request, response);
 });
 
 export { rolesRouter };
