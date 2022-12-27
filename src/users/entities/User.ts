@@ -1,5 +1,12 @@
+import { Role } from '@roles/entities/Role';
 import { randomUUID } from 'node:crypto';
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -20,6 +27,11 @@ export class User {
 
   @Column()
   avatar?: string;
+
+  @ManyToOne(() => Role, {
+    cascade: true,
+  })
+  role: Role;
 
   @CreateDateColumn()
   created_at: Date;
