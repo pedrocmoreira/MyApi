@@ -11,7 +11,8 @@ type CreateRoleDTO = {
 @injectable()
 export class CreateRoleUseCase {
   constructor(
-    @inject('RolesRepository') private rolesRepository: IRolesRepository
+    @inject('RolesRepository')
+    private rolesRepository: IRolesRepository
   ) {}
 
   async execute({ name }: CreateRoleDTO): Promise<Role> {

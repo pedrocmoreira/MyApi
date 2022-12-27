@@ -4,7 +4,7 @@ import { CreateUserController } from '@users/useCases/createUser/CreateUserContr
 import { container } from 'tsyringe';
 
 container.registerSingleton<IUsersRepository>(
-  'UserRepository',
+  'UsersRepository',
   UsersRepository
 );
 
