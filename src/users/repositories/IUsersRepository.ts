@@ -29,7 +29,7 @@ export interface IUsersRepository {
     password,
     isAdmin,
     role,
-  }: CreateUserDTO): Promise<Role>;
+  }: CreateUserDTO): Promise<User>;
   save(user: User): Promise<User>;
   findAll({
     page,
