@@ -23,7 +23,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "id": {
+                    "type": "string"
+                  },
                   "name": {
+                    "type": "string"
+                  },
+                  "created_at": {
                     "type": "string"
                   }
                 }
@@ -33,7 +39,19 @@
         },
         "responses": {
           "201": {
-            "description": "Role created"
+            "description": "Role created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Role already exists"
