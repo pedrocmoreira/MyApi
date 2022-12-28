@@ -8,7 +8,7 @@ import { User } from '@users/entities/User';
 import { IUsersRepository } from '@users/repositories/IUsersRepository';
 import uploadConfig from '../../../config/upload';
 
-export type UpdateAvatarDTO = {
+type UpdateAvatarDTO = {
   userId: string;
   avatarFileName: string;
 };
