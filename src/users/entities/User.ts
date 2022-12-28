@@ -1,4 +1,5 @@
 import { Role } from '@roles/entities/Role';
+import { Exclude } from 'class-transformer';
 import { randomUUID } from 'node:crypto';
 import {
   Column,
@@ -20,6 +21,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column()

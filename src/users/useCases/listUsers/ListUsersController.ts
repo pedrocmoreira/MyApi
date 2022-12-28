@@ -1,5 +1,6 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
+import { instanceToInstance } from 'class-transformer';
 import { ListUsersUseCase } from './ListUsersUseCase';
 
 export class ListUsersController {
@@ -17,6 +18,6 @@ export class ListUsersController {
 
     const users = await listUsersUseCase.execute({ page, limit });
 
-    return response.json(users);
+    return response.json(instanceToInstance(users));
   }
 }
