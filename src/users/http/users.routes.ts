@@ -11,15 +11,18 @@ import { CreateLoginController } from '@users/useCases/createLogin/CreateLoginCo
 import { isAuthenticated } from '@shared/http/middlewares/isAuthenticated';
 import { UpdateAvatarController } from '@users/useCases/updateAvatar/UpdateAvatarController';
 import { ShowProfileController } from '@users/useCases/showProfile/ShowProfileController';
+import { UpdateProfileController } from '@users/useCases/updateProfile/UpdateProfileController';
 
 const usersRouter = Router();
-const upload = multer(uploadConfig);
 
 const createUserController = container.resolve(CreateUserController);
 const listUserController = container.resolve(ListUsersController);
 const createLoginController = container.resolve(CreateLoginController);
 const updateAvatarController = container.resolve(UpdateAvatarController);
 const showProfileController = container.resolve(ShowProfileController);
+const updateProfileController = container.resolve(UpdateProfileController);
+
+const upload = multer(uploadConfig);
 
 usersRouter.post(
   '/',
@@ -74,5 +77,27 @@ usersRouter.patch(
 usersRouter.get('/profile', isAuthenticated, (request, response) => {
   return showProfileController.handle(request, response);
 });
+
+usersRouter.put(
+  '/profile',
+  isAuthenticated,
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().required(),
+      password: Joi.string().required(),
+      old_password: Joi.string().optional(),
+      password_confirmation: Joi.string()
+        .valid(Joi.ref('password'))
+        .when('password', {
+          is: Joi.exist(),
+          then: Joi.required(),
+        }),
+    },
+  }),
+  (request, response) => {
+    return updateProfileController.handle(request, response);
+  }
+);
 
 export { usersRouter };
