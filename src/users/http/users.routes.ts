@@ -12,6 +12,7 @@ import { isAuthenticated } from '@shared/http/middlewares/isAuthenticated';
 import { UpdateAvatarController } from '@users/useCases/updateAvatar/UpdateAvatarController';
 import { ShowProfileController } from '@users/useCases/showProfile/ShowProfileController';
 import { UpdateProfileController } from '@users/useCases/updateProfile/UpdateProfileController';
+import { CreateAccessAndRefreshTokenController } from '@users/useCases/createAccessAndRefreshToken/CreateAccessAndRefreshTokenController';
 
 const usersRouter = Router();
 
@@ -21,6 +22,9 @@ const createLoginController = container.resolve(CreateLoginController);
 const updateAvatarController = container.resolve(UpdateAvatarController);
 const showProfileController = container.resolve(ShowProfileController);
 const updateProfileController = container.resolve(UpdateProfileController);
+const createAccessAndRefreshToken = container.resolve(
+  CreateAccessAndRefreshTokenController
+);
 
 const upload = multer(uploadConfig);
 
@@ -62,6 +66,18 @@ usersRouter.post(
   }),
   (request, response) => {
     return createLoginController.handle(request, response);
+  }
+);
+
+usersRouter.post(
+  '/refresh_token',
+  celebrate({
+    [Segments.BODY]: {
+      refresh_token: Joi.string().required(),
+    },
+  }),
+  (request, response) => {
+    return createAccessAndRefreshToken.handle(request, response);
   }
 );
 
