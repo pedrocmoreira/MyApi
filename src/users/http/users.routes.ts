@@ -13,6 +13,7 @@ import { UpdateAvatarController } from '@users/useCases/updateAvatar/UpdateAvata
 import { ShowProfileController } from '@users/useCases/showProfile/ShowProfileController';
 import { UpdateProfileController } from '@users/useCases/updateProfile/UpdateProfileController';
 import { CreateAccessAndRefreshTokenController } from '@users/useCases/createAccessAndRefreshToken/CreateAccessAndRefreshTokenController';
+import { addUserInfoToRequest } from './middlewares/addUserInfoToRequest';
 
 const usersRouter = Router();
 
@@ -71,6 +72,7 @@ usersRouter.post(
 
 usersRouter.post(
   '/refresh_token',
+  addUserInfoToRequest,
   celebrate({
     [Segments.BODY]: {
       refresh_token: Joi.string().required(),
